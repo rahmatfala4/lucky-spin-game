@@ -1,9 +1,13 @@
-name: Build APK
-on: [push]
+name: Build APK Lucky Spin
+
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -18,16 +22,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-gstreamer-lite0 openjdk-17-jdk-headless zip unzip autoconf libtool pkg-config libncurses5-dev libncursesw5-dev cmake
 
-      - name: Build APK with Buildozer
+      - name: Install Buildozer
         run: |
           pip install --upgrade pip
           pip install buildozer cython==0.29.33
-          yes | buildozer android debug
+
+      - name: Build APK
+        run: yes | buildozer android debug
         env:
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
 
-      - name: Upload APK
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: LuckySpin-APK
+          name: LuckySpin-Game-APK
           path: bin/*.apk
