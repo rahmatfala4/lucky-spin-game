@@ -1,0 +1,19 @@
+{
+  "name": "lucky-spin-game",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@tanstack/react-query": "^4.0.0",
+    "zod": "^3.0.0",
+    "uuid": "^9.0.0"
+  },
+  "notes": "Install and run:\n- Install dependencies: npm install (or npm ci to use a lockfile)\n- Start development: npm run dev\n- Build for production: npm run build\n- Run production server: npm run start\n\nNotes about dependencies:\n- 'next', 'react', and 'react-dom' are set to 'latest'. Pinning them to specific versions is recommended to avoid unexpected breaking changes.\n- This project targets Node.js 16+. Consider adding an 'engines' field to enforce a Node.js version if needed."
+}
