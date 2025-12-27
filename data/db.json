@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "user_demo",
+      "email": "rahmatfala4@gmail.com",
+      "displayName": "Rahmat Fala",
+      "balance": 100000
+    }
+  ],
+  "withdrawals": [],
+  "adClaims": []
+}
