@@ -1,30 +1,28 @@
-name: Build APK Lucky Spin
-on: [push, pull_request]
+name: Build APK
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-gstreamer-lite0
-          sudo apt-get install -y openjdk-17-jdk-headless zip unzip autoconf libtool pkg-config libncurses5-dev libncursesw5-dev cmake
-
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install Buildozer
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-gstreamer-lite0 openjdk-17-jdk-headless zip unzip autoconf libtool pkg-config libncurses5-dev libncursesw5-dev cmake
+
+      - name: Build APK with Buildozer
         run: |
           pip install --upgrade pip
           pip install buildozer cython==0.29.33
-
-      - name: Build with Buildozer
-        run: yes | buildozer android debug
+          yes | buildozer android debug
         env:
           APP_ANDROID_ACCEPT_SDK_LICENSE: "1"
 
