@@ -1,0 +1,21 @@
+name: Build APK Lucky Spin
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get Date
+        id: get-date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Build with Buildozer
+        uses: ArtemGrinev/buildozer-action@v1
+        with:
+          buildozer_version: master
+          command: buildozer android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: LuckySpin-Reward-${{ steps.get-date.outputs.date }}
+          path: bin/*.apk
